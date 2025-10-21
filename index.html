@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Văn Hóa Hà Nội - Trải Nghiệm Đa Giao Diện</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base styles */
+        :root {
+            /* Default theme - Traditional Vietnamese */
+            --primary-color: #c8102e;
+            --secondary-color: #ffc72c;
+            --accent-color: #005b96;
+            --dark-color: #1a1a1a;
+            --light-color: #f8f8f8;
+            --success-color: #4caf50;
+            --error-color: #f44336;
+            --warning-color: #ff9800;
+            --info-color: #2196f3;
+            --font-family: 'Be Vietnam Pro', sans-serif;
+            --border-radius: 16px;
+            --transition-speed: 0.3s;
+            --bg-pattern: "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50 L60 40 L70 50 L60 60 Z' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E";
+        }
+
+        /* Modern Theme */
+        .theme-modern {
+            --primary-color: #6200ea;
+            --secondary-color: #00bcd4;
+            --accent-color: #ff4081;
+            --dark-color: #212121;
+            --light-color: #f5f5f5;
+            --success-color: #00c853;
+            --error-color: #ff1744;
+            --warning-color: #ff9100;
+            --info-color: #2979ff;
+            --font-family: 'Montserrat', sans-serif;
+            --border-radius: 24px;
+            --transition-speed: 0.4s;
+            --bg-pattern: "data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E";
+        }
+
+        /* Minimal Theme */
+        .theme-minimal {
+            --primary-color: #333333;
+            --secondary-color: #f0f0f0;
+            --accent-color: #555555;
+            --dark-color: #000000;
+            --light-color: #ffffff;
+            --success-color: #66bb6a;
+            --error-color: #ef5350;
+            --warning-color: #ffa726;
+            --info-color: #42a5f5;
+            --font-family: 'Roboto', sans-serif;
+            --border-radius: 8px;
+            --transition-speed: 0.2s;
+            --bg-pattern: "data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23000000' fill-opacity='0.03'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E";
+        }
+
+        /* Elegant Theme */
+        .theme-elegant {
+            --primary-color: #8d6e63;
+            --secondary-color: #d7ccc8;
+            --accent-color: #5d4037;
+            --dark-color: #3e2723;
+            --light-color: #efebe9;
+            --success-color: #689f38;
+            --error-color: #d32f2f;
+            --warning-color: #f57c00;
+            --info-color: #0288d1;
+            --font-family: 'Playfair Display', serif;
+            --border-radius: 12px;
+            --transition-speed: 0.5s;
+            --bg-pattern: "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%238d6e63' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E";
+        }
+
+        /* Playful Theme */
+        .theme-playful {
+            --primary-color: #ff6b6b;
+            --secondary-color: #4ecdc4;
+            --accent-color: #ffe66d;
+            --dark-color: #2d3436;
+            --light-color: #f7f7f7;
+            --success-color: #6bcf7f;
+            --error-color: #ff6b6b;
+            --warning-color: #ffe66d;
+            --info-color: #4ecdc4;
+            --font-family: 'Quicksand', sans-serif;
+            --border-radius: 20px;
+            --transition-speed: 0.3s;
+            --bg-pattern: "data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ff6b6b' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E";
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--light-color) 0%, #e0e0e0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            transition: all var(--transition-speed) ease;
+            background-image: url(var(--bg-pattern));
+            background-attachment: fixed;
+        }
+
+        /* Compact theme switcher */
+        .theme-switcher {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 1000;
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px;
+            border-radius: 30px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+        }
+
+        .theme-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-btn.active {
+            border-color: var(--dark-color);
+            transform: scale(1.15);
+        }
+
+        .theme-btn.active::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+        }
+
+        .theme-traditional {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .theme-modern-btn {
+            background: linear-gradient(135deg, #6200ea, #00bcd4);
+        }
+
+        .theme-minimal-btn {
+            background: linear-gradient(135deg, #333333, #f0f0f0);
+        }
+
+        .theme-elegant-btn {
+            background: linear-gradient(135deg, #8d6e63, #d7ccc8);
+        }
+
+        .theme-playful-btn {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+        }
+
+        /* Animated background elements */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            opacity: 0.08;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-20px) rotate(10deg);
+            }
+        }
+
+        /* Compact header */
+        .header {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 0.8rem 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(var(--bg-pattern));
+            background-size: 100px 100px;
+            animation: patternMove 20s linear infinite;
+            opacity: 0.2;
+        }
+
+        @keyframes patternMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-title {
+            flex: 1;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0.2rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            animation: fadeInUp 0.8s ease 0.2s both;
+        }
+
+        /* Compact stats bar */
+        .stats-bar {
+            display: flex;
+            gap: 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            padding: 0.4rem 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-icon {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        .stat-value {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stat-label {
+            font-size: 0.7rem;
+            opacity: 0.8;
+            display: none;
+        }
+
+        /* Main container */
+        .container {
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            flex: 1;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Quiz card */
+        .quiz-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            animation: slideIn 0.5s ease;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .quiz-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+        }
+
+        /* Progress bar */
+        .progress-container {
+            margin-bottom: 1.5rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark-color);
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Question section */
+        .question-container {
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 1.2rem;
+            line-height: 1.5;
+        }
+
+        /* Answer options */
+        .answers-container {
+            display: grid;
+            gap: 0.8rem;
+        }
+
+        .answer-option {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            padding: 1rem 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-option::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(200, 16, 46, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .answer-option:hover::before {
+            left: 100%;
+        }
+
+        .answer-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-color);
+        }
+
+        .answer-letter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: var(--light-color);
+            border-radius: 50%;
+            margin-right: 1rem;
+            font-weight: 600;
+            color: var(--dark-color);
+            flex-shrink: 0;
+        }
+
+        .answer-text {
+            flex: 1;
+            font-size: 1rem;
+        }
+
+        .answer-option.correct {
+            background: rgba(76, 175, 80, 0.1);
+            border-color: var(--success-color);
+            animation: pulse 0.5s ease;
+        }
+
+        .answer-option.incorrect {
+            background: rgba(244, 67, 54, 0.1);
+            border-color: var(--error-color);
+            animation: shake 0.5s ease;
+        }
+
+        .answer-option.correct .answer-letter {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .answer-option.incorrect .answer-letter {
+            background: var(--error-color);
+            color: white;
+        }
+
+        /* Buttons */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: var(--font-family);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(200, 16, 46, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light-color);
+            color: var(--dark-color);
+            border: 2px solid #e0e0e0;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-hint {
+            background: var(--info-color);
+            color: white;
+        }
+
+        .btn-hint:hover {
+            background: #0288d1;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Optimized achievements panel */
+        .achievements-panel {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            padding: 1.2rem;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .achievements-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .achievements-title {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .achievements-count {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .achievement {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 0.8rem;
+            border-radius: var(--border-radius);
+            background: var(--light-color);
+            transition: all var(--transition-speed) ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .achievement.unlocked {
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.2));
+            box-shadow: 0 4px 8px rgba(76, 175, 80, 0.15);
+        }
+
+        .achievement:hover {
+            transform: translateY(-3px);
+        }
+
+        .achievement-icon {
+            font-size: 1.8rem;
+            margin-bottom: 0.4rem;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .achievement.unlocked .achievement-icon {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+
+        .achievement-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .achievement-desc {
+            font-size: 0.65rem;
+            color: #666;
+            margin-top: 0.2rem;
+            display: none;
+        }
+
+        .achievement:hover .achievement-desc {
+            display: block;
+        }
+
+        /* Results screen with GIF */
+        .results-container {
+            text-align: center;
+            padding: 1.5rem;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .results-gif-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 1rem;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            position: relative;
+            background: var(--light-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .results-gif {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: gifEntrance 0.8s ease;
+        }
+
+        .results-fallback {
+            font-size: 4rem;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes gifEntrance {
+            from {
+                opacity: 0;
+                transform: scale(0.8) rotate(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .results-title {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+        }
+
+        .results-score {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.8rem;
+        }
+
+        .results-message {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-details {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            padding: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        /* Confetti animation */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            position: absolute;
+            animation: confetti-fall 3s linear;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Hint popup */
+        .hint-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 450px;
+            width: 90%;
+            display: none;
+        }
+
+        .hint-popup.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .hint-title {
+            font-size: 1.3rem;
+            color: var(--dark-color);
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .hint-content {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 1.2rem;
+        }
+
+        .hint-close {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* Achievement notification */
+        .achievement-notification {
+            position: fixed;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 0.8rem 1.2rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            animation: fadeInDown 0.5s ease;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .stats-bar {
+                gap: 1rem;
+                padding: 0.3rem 0.8rem;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .button-container {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .achievements-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+
+            .theme-switcher {
+                top: auto;
+                bottom: 10px;
+                right: 50%;
+                transform: translateX(50%);
+            }
+
+            .results-gif-container {
+                width: 150px;
+                height: 150px;
+            }
+        }
+    </style>
+</head>
+<body class="theme-traditional">
+    <!-- Animated background elements -->
+    <div class="bg-animation" id="bgAnimation"></div>
+
+    <!-- Compact theme switcher -->
+    <div class="theme-switcher">
+        <div class="theme-btn theme-traditional active" data-theme="traditional" title="Giao diện truyền thống"></div>
+        <div class="theme-btn theme-modern-btn" data-theme="modern" title="Giao diện hiện đại"></div>
+        <div class="theme-btn theme-minimal-btn" data-theme="minimal" title="Giao diện tối giản"></div>
+        <div class="theme-btn theme-elegant-btn" data-theme="elegant" title="Giao diện thanh lịch"></div>
+        <div class="theme-btn theme-playful-btn" data-theme="playful" title="Giao diện vui nhộn"></div>
+    </div>
+
+    <!-- Compact header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <h1><i class="fas fa-landmark"></i> Quiz Văn Hóa Hà Nội</h1>
+                <p>Khám phá những nét đẹp truyền thống của người Tràng An</p>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <i class="fas fa-fire stat-icon"></i>
+                    <div class="stat-value" id="streakCount">0</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-lightbulb stat-icon"></i>
+                    <div class="stat-value" id="hintsCount">3</div>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-clock stat-icon"></i>
+                    <div class="stat-value" id="timer">00:00</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main container -->
+    <main class="container">
+        <div class="quiz-card">
+            <div class="progress-container">
+                <div class="progress-label">
+                    <span>Tiến độ</span>
+                    <span id="progress-text">1 / 10</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div id="quiz-content">
+                <!-- Quiz content will be dynamically inserted here -->
+            </div>
+
+            <div class="button-container">
+                <button class="btn btn-secondary" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-left"></i> Câu trước
+                </button>
+                <button class="btn btn-hint" id="hint-btn">
+                    <i class="fas fa-lightbulb"></i> Gợi ý
+                </button>
+                <button class="btn btn-primary" id="next-btn" disabled>
+                    Câu tiếp theo <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Optimized achievements panel -->
+        <div class="achievements-panel">
+            <div class="achievements-header">
+                <h2 class="achievements-title">
+                    <i class="fas fa-trophy"></i> Thành tựu
+                </h2>
+                <div class="achievements-count" id="achievementsCount">0/8</div>
+            </div>
+            <div class="achievements-grid" id="achievementsGrid">
+                <!-- Achievements will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Hint popup -->
+    <div class="overlay" id="overlay"></div>
+    <div class="hint-popup" id="hintPopup">
+        <h3 class="hint-title">
+            <i class="fas fa-lightbulb"></i> Gợi ý
+        </h3>
+        <div class="hint-content" id="hintContent">
+            <!-- Hint content will be dynamically inserted here -->
+        </div>
+        <button class="hint-close" id="hintClose">Đóng</button>
+    </div>
+
+    <script>
+        // Quiz data
+        const quizData = [
+            {
+                question: "Tết Nguyên Đán có ý nghĩa gì đối với người Hà Nội?",
+                answers: [
+                    { text: "Là dịp tổng kết năm học", correct: false },
+                    { text: "Là dịp quan trọng nhất trong năm, thể hiện lòng hiếu kính và sum họp gia đình", correct: true },
+                    { text: "Là ngày tưởng niệm các vị anh hùng dân tộc", correct: false },
+                    { text: "Là dịp nghỉ lễ ngắn trong năm", correct: false }
+                ],
+                hint: "Tết Nguyên Đán là lễ hội quan trọng nhất trong năm của người Việt, gắn liền với gia đình và tổ tiên."
+            },
+            {
+                question: "Vào ngày 23 tháng Chạp, người Hà Nội thường làm lễ gì?",
+                answers: [
+                    { text: "Lễ tạ ơn trời đất", correct: false },
+                    { text: "Lễ hội đền Gióng", correct: false },
+                    { text: "Lễ cúng ông Công, ông Táo", correct: true },
+                    { text: "Lễ hội Trung Thu", correct: false }
+                ],
+                hint: "Ngày 23 tháng Chạp là ngày các vị thần bếp lên trời báo cáo việc tốt xấu của gia đình."
+            },
+            {
+                question: "Tết Trung Thu còn được gọi là gì?",
+                answers: [
+                    { text: "Tết đoàn viên", correct: true },
+                    { text: "Tết cầu an", correct: false },
+                    { text: "Tết thiếu nhi", correct: false },
+                    { text: "Tết đầu năm", correct: false }
+                ],
+                hint: "Tết Trung Thu là dịp gia đình sum họp, ngắm trăng và thưởng thức bánh nướng, bánh dẻo."
+            },
+            {
+                question: "Lễ hội nào sau đây KHÔNG thuộc Hà Nội?",
+                answers: [
+                    { text: "Lễ hội Đống Đa", correct: false },
+                    { text: "Lễ hội đền Cổ Loa", correct: false },
+                    { text: "Lễ hội Chùa Hương", correct: false },
+                    { text: "Lễ hội Bà Chúa Xứ", correct: true }
+                ],
+                hint: "Lễ hội Bà Chúa Xứ là lễ hội nổi tiếng ở miền Tây Nam Bộ, cụ thể là tại núi Sam, Châu Đốc."
+            },
+            {
+                question: "Người Hà Nội thường thể hiện sự tôn kính với tổ tiên bằng cách nào?",
+                answers: [
+                    { text: "Đi du lịch vào dịp Tết", correct: false },
+                    { text: "Tổ chức nghi lễ thờ cúng tổ tiên", correct: true },
+                    { text: "Mở tiệc lớn mời hàng xóm", correct: false },
+                    { text: "Mua sắm thật nhiều đồ", correct: false }
+                ],
+                hint: "Thờ cúng tổ tiên là một trong những tín ngưỡng quan trọng nhất của người Việt, đặc biệt trong dịp Tết."
+            },
+            {
+                question: "Khi đi thăm hỏi, người Hà Nội thường mang theo gì?",
+                answers: [
+                    { text: "Tiền và quần áo", correct: false },
+                    { text: "Quà tặng như bánh, trái cây", correct: true },
+                    { text: "Bức thư cảm ơn", correct: false },
+                    { text: "Cây cảnh", correct: false }
+                ],
+                hint: "Quà tặng khi đi thăm hỏi thường là những vật phẩm tượng trưng cho sự may mắn, thịnh vượng."
+            },
+            {
+                question: "Trong giao tiếp, người Hà Nội nổi bật với đặc điểm nào sau đây?",
+                answers: [
+                    { text: "Thẳng thắn, đôi khi cộc cằn", correct: false },
+                    { text: "Lịch sự, thanh lịch và hào hoa", correct: true },
+                    { text: "Nói nhanh, dùng nhiều tiếng lóng", correct: false },
+                    { text: "Im lặng để thể hiện tôn trọng", correct: false }
+                ],
+                hint: "Người Hà Nội nổi tiếng với cách nói chuyện nhẹ nhàng, lịch thiệp và tinh tế."
+            },
+            {
+                question: "Lối sống của người Hà Nội thường coi trọng điều gì nhất?",
+                answers: [
+                    { text: "Tiền bạc và địa vị", correct: false },
+                    { text: "Trí tuệ, đạo đức và lòng nghĩa khí", correct: true },
+                    { text: "Hình thức và danh tiếng", correct: false },
+                    { text: "Niềm vui vật chất", correct: false }
+                ],
+                hint: "Người Hà Nội truyền thống coi trọng giá trị tinh thần, tri thức và phẩm chất đạo đức."
+            },
+            {
+                question: "Lễ hội Chùa Hương được tổ chức nhằm mục đích gì?",
+                answers: [
+                    { text: "Tưởng nhớ các vị vua triều Lý", correct: false },
+                    { text: "Cầu bình an, may mắn và thể hiện lòng thành kính Phật", correct: true },
+                    { text: "Tôn vinh nghề gốm truyền thống", correct: false },
+                    { text: "Chào đón mùa xuân", correct: false }
+                ],
+                hint: "Lễ hội Chùa Hương là một trong những lễ hội Phật giáo lớn nhất miền Bắc Việt Nam."
+            },
+            {
+                question: "Trong sinh hoạt hằng ngày, người Hà Nội thường thể hiện tinh thần gì?",
+                answers: [
+                    { text: "Cá nhân hóa, độc lập tuyệt đối", correct: false },
+                    { text: "Sống khép kín, ít giao tiếp", correct: false },
+                    { text: "Gắn kết cộng đồng, tương thân tương ái", correct: true },
+                    { text: "Cạnh tranh để phát triển bản thân", correct: false }
+                ],
+                hint: "Tinh thần cộng đồng, láng giềng thân thiết là một trong những nét đẹp văn hóa của người Hà Nội."
+            }
+        ];
+
+        // Score-based GIFs configuration
+        const scoreGifs = {
+            perfect: {
+                minScore: 100,
+                gifUrl: 'perfect.gif',
+                fallbackEmoji: '🏆',
+                title: 'Hoàn hảo!',
+                message: 'Bạn đã đạt điểm tuyệt đối! Chuyên gia văn hóa Hà Nội đây rồi!'
+            },
+            good: {
+                minScore: 80,
+                gifUrl: 'good.gif',
+                fallbackEmoji: '🌟',
+                title: 'Tuyệt vời!',
+                message: 'Kiến thức về văn hóa Hà Nội của bạn rất ấn tượng!'
+            },
+            normal: {
+                minScore: 60,
+                gifUrl: 'normal.gif',
+                fallbackEmoji: '👍',
+                title: 'Khá tốt!',
+                message: 'Bạn có hiểu biết tốt về văn hóa Hà Nội!'
+            },
+            meh: {
+                minScore: 40,
+                gifUrl: 'meh.gif',
+                fallbackEmoji: '📚',
+                title: 'Cần cố gắng hơn!',
+                message: 'Hãy tiếp tục tìm hiểu thêm về văn hóa Hà Nội nhé!'
+            },
+            bad: {
+                minScore: 0,
+                gifUrl: 'bad.gif',
+                fallbackEmoji: '💪',
+                title: 'Cần nỗ lực hơn!',
+                message: 'Văn hóa Hà Nội rất phong phú, đừng bỏ cuộc!'
+            }
+        };
+
+        // Achievements data
+        const achievementsData = [
+            { id: 'first_correct', name: 'Bắt đầu', desc: 'Trả lời đúng câu đầu tiên', icon: '🎯', unlocked: false },
+            { id: 'streak_3', name: 'Chuỗi 3', desc: 'Trả lời đúng 3 câu liên tiếp', icon: '🔥', unlocked: false },
+            { id: 'streak_5', name: 'Chuỗi 5', desc: 'Trả lời đúng 5 câu liên tiếp', icon: '⚡', unlocked: false },
+            { id: 'perfect', name: 'Hoàn hảo', desc: 'Hoàn thành quiz với 10/10', icon: '💯', unlocked: false },
+            { id: 'no_hints', name: 'Tự lực', desc: 'Hoàn thành quiz không dùng gợi ý', icon: '🧠', unlocked: false },
+            { id: 'speed_run', name: 'Nhanh nhẹn', desc: 'Hoàn thành quiz dưới 2 phút', icon: '⏱️', unlocked: false },
+            { id: 'explorer', name: 'Nhà thám hiểm', desc: 'Thử tất cả các giao diện', icon: '🎨', unlocked: false },
+            { id: 'persistent', name: 'Kiên trì', desc: 'Làm lại quiz 3 lần', icon: '💪', unlocked: false }
+        ];
+
+        // Quiz state
+        let currentQuestion = 0;
+        let userAnswers = [];
+        let score = 0;
+        let quizCompleted = false;
+        let streak = 0;
+        let hintsRemaining = 3;
+        let startTime = Date.now();
+        let timerInterval;
+        let attempts = 0;
+        let usedThemes = new Set(['traditional']); // Start with traditional theme
+        let usedHints = false;
+
+        // DOM elements
+        const quizContent = document.getElementById('quiz-content');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const hintBtn = document.getElementById('hint-btn');
+        const progressText = document.getElementById('progress-text');
+        const progressFill = document.getElementById('progress-fill');
+        const streakCount = document.getElementById('streakCount');
+        const hintsCount = document.getElementById('hintsCount');
+        const timer = document.getElementById('timer');
+        const achievementsGrid = document.getElementById('achievementsGrid');
+        const achievementsCount = document.getElementById('achievementsCount');
+        const hintPopup = document.getElementById('hintPopup');
+        const hintContent = document.getElementById('hintContent');
+        const hintClose = document.getElementById('hintClose');
+        const overlay = document.getElementById('overlay');
+        const bgAnimation = document.getElementById('bgAnimation');
+
+        // Initialize quiz
+        function initQuiz() {
+            userAnswers = new Array(quizData.length).fill(null);
+            score = 0;
+            streak = 0;
+            hintsRemaining = 3;
+            startTime = Date.now();
+            usedHints = false;
+            attempts++;
+            
+            updateStreak();
+            updateHints();
+            startTimer();
+            displayQuestion();
+            updateProgress();
+            renderAchievements();
+            createBackgroundElements();
+        }
+
+        // Create animated background elements
+        function createBackgroundElements() {
+            bgAnimation.innerHTML = '';
+            const elements = ['🏮', '🌸', '🏛️', '🎋', '🎎', '🌺', '🏯', '🎑'];
+            
+            for (let i = 0; i < 10; i++) {
+                const element = document.createElement('div');
+                element.className = 'floating-element';
+                element.textContent = elements[Math.floor(Math.random() * elements.length)];
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.fontSize = `${Math.random() * 20 + 15}px`;
+                element.style.animationDelay = `${Math.random() * 5}s`;
+                element.style.animationDuration = `${Math.random() * 10 + 15}s`;
+                bgAnimation.appendChild(element);
+            }
+        }
+
+        // Display current question
+        function displayQuestion() {
+            const question = quizData[currentQuestion];
+            const userAnswer = userAnswers[currentQuestion];
+
+            let html = `
+                <div class="question-container">
+                    <span class="question-number">Câu ${currentQuestion + 1}</span>
+                    <h2 class="question-text">${question.question}</h2>
+                    <div class="answers-container">
+            `;
+
+            question.answers.forEach((answer, index) => {
+                const letter = String.fromCharCode(65 + index);
+                const isCorrect = answer.correct;
+                const isSelected = userAnswer === index;
+                let className = 'answer-option';
+
+                if (userAnswer !== null) {
+                    if (isCorrect) {
+                        className += ' correct';
+                    } else if (isSelected && !isCorrect) {
+                        className += ' incorrect';
+                    }
+                }
+
+                html += `
+                    <div class="${className}" data-index="${index}" ${userAnswer === null ? 'onclick="selectAnswer(' + index + ')"' : ''}>
+                        <div class="answer-letter">${letter}</div>
+                        <div class="answer-text">${answer.text}</div>
+                        ${userAnswer !== null && isCorrect ? '<i class="fas fa-check-circle" style="color: var(--success-color); margin-left: 1rem;"></i>' : ''}
+                        ${userAnswer !== null && isSelected && !isCorrect ? '<i class="fas fa-times-circle" style="color: var(--error-color); margin-left: 1rem;"></i>' : ''}
+                    </div>
+                `;
+            });
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+
+            // Update buttons
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = userAnswer === null && !quizCompleted;
+            hintBtn.disabled = userAnswer !== null || hintsRemaining === 0;
+            
+            if (currentQuestion === quizData.length - 1 && userAnswer !== null) {
+                nextBtn.innerHTML = 'Xem kết quả <i class="fas fa-flag-checkered"></i>';
+            } else {
+                nextBtn.innerHTML = 'Câu tiếp theo <i class="fas fa-arrow-right"></i>';
+            }
+        }
+
+        // Select answer
+        function selectAnswer(index) {
+            if (userAnswers[currentQuestion] !== null) return;
+
+            userAnswers[currentQuestion] = index;
+            
+            if (quizData[currentQuestion].answers[index].correct) {
+                score++;
+                streak++;
+                updateStreak();
+                checkAchievements();
+            } else {
+                streak = 0;
+                updateStreak();
+            }
+
+            displayQuestion();
+            updateProgress();
+        }
+
+        // Navigate to next question
+        function nextQuestion() {
+            if (currentQuestion < quizData.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+                updateProgress();
+            } else {
+                showResults();
+            }
+        }
+
+        // Navigate to previous question
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                updateProgress();
+            }
+        }
+
+        // Update progress bar
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / quizData.length) * 100;
+            progressFill.style.width = `${progress}%`;
+            progressText.textContent = `${currentQuestion + 1} / ${quizData.length}`;
+        }
+
+        // Update streak counter
+        function updateStreak() {
+            streakCount.textContent = streak;
+        }
+
+        // Update hints counter
+        function updateHints() {
+            hintsCount.textContent = hintsRemaining;
+            hintBtn.disabled = hintsRemaining === 0;
+        }
+
+        // Start timer
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                const minutes = Math.floor(elapsed / 60);
+                const seconds = elapsed % 60;
+                timer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Show hint
+        function showHint() {
+            if (hintsRemaining > 0 && userAnswers[currentQuestion] === null) {
+                hintsRemaining--;
+                usedHints = true;
+                updateHints();
+                
+                hintContent.textContent = quizData[currentQuestion].hint;
+                hintPopup.classList.add('active');
+                overlay.classList.add('active');
+            }
+        }
+
+        // Close hint popup
+        function closeHint() {
+            hintPopup.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Get score-based GIF data
+        function getScoreGifData(percentage) {
+            for (const [key, data] of Object.entries(scoreGifs)) {
+                if (percentage >= data.minScore) {
+                    return data;
+                }
+            }
+            return scoreGifs.bad;
+        }
+
+        // Show results with GIF
+        function showResults() {
+            quizCompleted = true;
+            clearInterval(timerInterval);
+            
+            const elapsed = Math.floor((Date.now() - startTime) / 1000);
+            const percentage = Math.round((score / quizData.length) * 100);
+            const gifData = getScoreGifData(percentage);
+
+            // Create GIF container with fallback
+            const gifHtml = `
+                <div class="results-gif-container">
+                    <img src="${gifData.gifUrl}" alt="Result GIF" class="results-gif" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="results-fallback" style="display:none;">${gifData.fallbackEmoji}</div>
+                </div>
+            `;
+
+            let html = `
+                <div class="results-container">
+                    ${gifHtml}
+                    <h2 class="results-title">${gifData.title}</h2>
+                    <div class="results-score">${score} / ${quizData.length}</div>
+                    <p class="results-message">${gifData.message}</p>
+                    
+                    <div class="results-details">
+                        <div class="result-item">
+                            <span>Số câu đúng:</span>
+                            <span><strong>${score}</strong></span>
+                        </div>
+                        <div class="result-item">
+                            <span>Số câu sai:</span>
+                            <span><strong>${quizData.length - score}</strong></span>
+                        </div>
+                        <div class="result-item">
+                            <span>Tỷ lệ chính xác:</span>
+                            <span><strong>${percentage}%</strong></span>
+                        </div>
+                        <div class="result-item">
+                            <span>Thời gian hoàn thành:</span>
+                            <span><strong>${timer.textContent}</strong></span>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary" onclick="restartQuiz()">
+                        <i class="fas fa-redo"></i> Làm lại quiz
+                    </button>
+                </div>
+            `;
+
+            quizContent.innerHTML = html;
+            document.querySelector('.button-container').style.display = 'none';
+            progressFill.style.width = '100%';
+            progressText.textContent = 'Hoàn thành!';
+            
+            // Create confetti for good scores
+            if (percentage >= 80) {
+                createConfetti();
+            }
+            
+            // Check for achievements
+            checkAchievements();
+            renderAchievements();
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 0;
+            quizCompleted = false;
+            
+            document.querySelector('.button-container').style.display = 'flex';
+            initQuiz();
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const colors = ['#c8102e', '#ffc72c', '#005b96', '#4caf50', '#ff9800'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(confetti);
+                    
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 30);
+            }
+        }
+
+        // Check and unlock achievements
+        function checkAchievements() {
+            // First correct answer
+            if (score === 1 && !achievementsData.find(a => a.id === 'first_correct').unlocked) {
+                achievementsData.find(a => a.id === 'first_correct').unlocked = true;
+                showAchievementNotification('first_correct');
+            }
+            
+            // Streak achievements
+            if (streak >= 3 && !achievementsData.find(a => a.id === 'streak_3').unlocked) {
+                achievementsData.find(a => a.id === 'streak_3').unlocked = true;
+                showAchievementNotification('streak_3');
+            }
+            
+            if (streak >= 5 && !achievementsData.find(a => a.id === 'streak_5').unlocked) {
+                achievementsData.find(a => a.id === 'streak_5').unlocked = true;
+                showAchievementNotification('streak_5');
+            }
+            
+            // Perfect score
+            if (quizCompleted && score === quizData.length && !achievementsData.find(a => a.id === 'perfect').unlocked) {
+                achievementsData.find(a => a.id === 'perfect').unlocked = true;
+                showAchievementNotification('perfect');
+            }
+            
+            // No hints used
+            if (quizCompleted && !usedHints && !achievementsData.find(a => a.id === 'no_hints').unlocked) {
+                achievementsData.find(a => a.id === 'no_hints').unlocked = true;
+                showAchievementNotification('no_hints');
+            }
+            
+            // Speed run
+            if (quizCompleted && (Date.now() - startTime) < 120000 && !achievementsData.find(a => a.id === 'speed_run').unlocked) {
+                achievementsData.find(a => a.id === 'speed_run').unlocked = true;
+                showAchievementNotification('speed_run');
+            }
+            
+            // Explorer - try all themes
+            if (usedThemes.size >= 5 && !achievementsData.find(a => a.id === 'explorer').unlocked) {
+                achievementsData.find(a => a.id === 'explorer').unlocked = true;
+                showAchievementNotification('explorer');
+            }
+            
+            // Persistent - try 3 times
+            if (attempts >= 3 && !achievementsData.find(a => a.id === 'persistent').unlocked) {
+                achievementsData.find(a => a.id === 'persistent').unlocked = true;
+                showAchievementNotification('persistent');
+            }
+        }
+
+        // Show achievement notification
+        function showAchievementNotification(achievementId) {
+            const achievement = achievementsData.find(a => a.id === achievementId);
+            if (!achievement) return;
+            
+            const notification = document.createElement('div');
+            notification.className = 'achievement-notification';
+            notification.innerHTML = `
+                <div style="font-size: 1.8rem;">${achievement.icon}</div>
+                <div>
+                    <div style="font-weight: 600; color: var(--dark-color);">Thành tựu mở khóa!</div>
+                    <div style="font-size: 0.8rem; color: #666;">${achievement.name}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s ease';
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        // Render achievements
+        function renderAchievements() {
+            achievementsGrid.innerHTML = '';
+            const unlockedCount = achievementsData.filter(a => a.unlocked).length;
+            achievementsCount.textContent = `${unlockedCount}/8`;
+            
+            achievementsData.forEach(achievement => {
+                const achievementEl = document.createElement('div');
+                achievementEl.className = `achievement ${achievement.unlocked ? 'unlocked' : ''}`;
+                achievementEl.innerHTML = `
+                    <div class="achievement-icon">${achievement.icon}</div>
+                    <div class="achievement-name">${achievement.name}</div>
+                    <div class="achievement-desc">${achievement.desc}</div>
+                `;
+                achievementsGrid.appendChild(achievementEl);
+            });
+        }
+
+        // Theme switcher
+        function switchTheme(themeName) {
+            document.body.className = `theme-${themeName}`;
+            usedThemes.add(themeName);
+            
+            // Update active theme button
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === themeName) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Recreate background elements for new theme
+            createBackgroundElements();
+            
+            // Check for explorer achievement
+            checkAchievements();
+            renderAchievements();
+        }
+
+        // Event listeners
+        prevBtn.addEventListener('click', prevQuestion);
+        nextBtn.addEventListener('click', nextQuestion);
+        hintBtn.addEventListener('click', showHint);
+        hintClose.addEventListener('click', closeHint);
+        overlay.addEventListener('click', closeHint);
+
+        // Theme switcher event listeners
+        document.querySelectorAll('.theme-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                switchTheme(btn.dataset.theme);
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (quizCompleted) return;
+            
+            if (e.key === 'ArrowLeft' && !prevBtn.disabled) {
+                prevQuestion();
+            } else if (e.key === 'ArrowRight' && !nextBtn.disabled) {
+                nextQuestion();
+            } else if (e.key >= '1' && e.key <= '4') {
+                const index = parseInt(e.key) - 1;
+                if (index < quizData[currentQuestion].answers.length) {
+                    selectAnswer(index);
+                }
+            } else if (e.key === 'h' && !hintBtn.disabled) {
+                showHint();
+            }
+        });
+
+        // Initialize quiz on load
+        initQuiz();
+    </script>
+</body>
+</html>
